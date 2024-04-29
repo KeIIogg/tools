@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 #add .bashrc for qt (network connection)
 
-echo "
+echo -e "
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER
 /openpilot"
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
