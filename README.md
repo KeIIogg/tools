@@ -21,10 +21,20 @@ https://sourceforge.net/projects/vcxsrv
 
 ![6](https://github.com/seonghoonko/plotjuggler/assets/68089983/f0ca426f-c7e8-4be8-95e3-1bbe44158b69)
 
--Ubuntu 20.04 with wsl
+Choose install method [1] or [2]
+
+-Ubuntu 20.04 with wsl  [1]
 https://apps.microsoft.com/detail/9mttcl66cpxj?hl=en-us&gl=US
 
+-Ubuntu 20.04 with wsl  [2]
+open cmd in Administrator authority
 
+wsl --unregister ubuntu
+wsl –unregister ubuntu-20.04
+
+delete app ubuntu(20.04) in setting in windows 10
+
+wsl --install -d Ubuntu-20.04
 
 # Install  (in ubuntu)
 excute installer command in ubuntu 20.04
