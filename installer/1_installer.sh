@@ -23,12 +23,11 @@ export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0";
 export LIBGL_ALWAYS_INDIRECT=1;
 export DISPLAY=$WSL_IF_IP:0;
 unset LIBGL_ALWAYS_INDIRECT;
-tools/ubuntu_setup.sh ; cd ~/openpilot ;
-poetry shell ; 
+tools/ubuntu_setup.sh ; 
+cd ~/openpilot&&poetry shell ; 
 sleep 10  ; 
-scons -u -j$(nproc) ; 
-cd ~/openpilot/tools/plotjuggler ;
-./juggle.py --install
+cd ~/openpilot&&scons -u -j$(nproc) ; 
+cd ~/openpilot/tools/plotjuggler&&./juggle.py --install
 
 #add .bashrc for qt (network connection)
 cd ~;
