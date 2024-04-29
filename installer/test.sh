@@ -1,3 +1,3 @@
 #!/usr/bin/bash
 mv ~/.bashrc ~/.bashrc.bak;
-cd ~/plogjuggler/installer&& bashrc ~/.bashrc;
+cd ~/plotjuggler/installer&& bashrc ~/.bashrc;
