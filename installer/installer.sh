@@ -1,6 +1,6 @@
 #!/usr/bin/bash
-cd ~&& mv .bashrc .bashrc.bak;
-cd ~/plogjuggler && mv bashrc .bashrc;
+mv ~/.bashrc ~/.bashrc.bak;
+mv ~/plogjuggler/installer/bashrc ~/.bashrc;
 cd ~;
 sudo apt update ; 
 upgrade ; 
