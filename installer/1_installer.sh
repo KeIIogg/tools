@@ -14,8 +14,6 @@ pip3 install  scons ;
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash ; 
 sudo apt-get update ; 
 sudo apt install git-lfs; 
-export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER
-/openpilot";
 cd ~ ; git clone --recurse-submodules https://github.com/commaai/openpilot.git ;
 cd ~/openpilot ; git lfs pull ; 
 tools/ubuntu_setup.sh ; cd ~/openpilot ;
