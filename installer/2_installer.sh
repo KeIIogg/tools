@@ -2,10 +2,10 @@
 #add .bashrc for qt (network connection)
 
 cd /etc/;
-sed '98 i\
+sudo sed '98 i\
 #Custom alias
 alias op_plot='cd ~/openpilot/tools/plotjuggler&&./juggle.py --stream’' bash.bashrsc;
-sed '$s/$/\n
+sudo sed '$s/$/\n
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER
 /openpilot"
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
