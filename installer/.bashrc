@@ -92,8 +92,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Add plotjuggler exucute command
-alias op_plot='cd ~/openpilot/tools/plotjuggler&&./juggle.py --stream’
+# Add execute Plotjuggler command lind
+alias op_plot='cd ~/openpilot/tools/plotjuggler&&./juggle.py --stream'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -119,9 +119,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-source ~/.pyenvrc
-
+# Python directory -> openpilot
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot"
+
+# qt display setting (network)
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
 export LIBGL_ALWAYS_INDIRECT=1
 export DISPLAY=$WSL_IF_IP:0
