@@ -2,11 +2,11 @@
 #add .bashrc for qt (network connection)
 
 cd /etc/;
-chmod 777 bash.bashrc;
+chmod +x bash.bashrc;
+chmod +w bash.bashrc;
 
 sed '98 i\
-#Custom alias
-alias op_plot='cd ~/openpilot/tools/plotjuggler&&./juggle.py --stream’' bash.bashrsc;
+alias op_plot='cd ~/openpilot/tools/plotjuggler&&./juggle.py --stream'' bash.bashrsc;
 
 sed '$s/$/\n
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER
