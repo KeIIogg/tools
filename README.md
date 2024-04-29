@@ -29,12 +29,12 @@ https://apps.microsoft.com/detail/9mttcl66cpxj?hl=en-us&gl=US
 -Ubuntu 20.04 with wsl  [2]
 open cmd in Administrator authority
 
-wsl --unregister ubuntu
-wsl –unregister ubuntu-20.04
+wsl --unregister ubuntu ;
+wsl –unregister ubuntu-20.04;
 
 delete app ubuntu(20.04) in setting in windows 10
 
-wsl --install -d Ubuntu-20.04
+wsl --install -d Ubuntu-20.04;
 
 # Install  (in ubuntu)
 excute installer command in ubuntu 20.04
