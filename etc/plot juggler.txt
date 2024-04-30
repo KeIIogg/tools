@@ -15,7 +15,7 @@ wsl --set-default-version 2
 
 ######우분투 20.04 gui 셋팅 ##################
 
-https://bmind305.tistory.com/110
+https://psychoria.tistory.com/739
 
 sudo nano ~/.bashrc
 export PYTHONPATH="/home/shko/openpilot/.venv/bin/python3:/home/shko/openpilot"
@@ -44,6 +44,8 @@ sudo apt install scons
 
 pip3 install  scons
 
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+
 sudo apt-get install git-lfs
 
 cd ~&&git clone --recurse-submodules https://github.com/commaai/openpilot.git&& cd ~/openpilot&& git lfs pull&& tools/ubuntu_setup.sh
@@ -71,25 +73,12 @@ cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream
 
 
 
-##################################빠른 한방 설치. 성공여부 제외###################################
-
-**Cmd or Powershell 관리자 권한 실행
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-wsl --set-default-version 2
-
-
-username : shko 로
 
 sudo nano ~/.bashrc
 맨 끝줄에. 
-export PYTHONPATH="/home/shko/openpilot/.venv/bin/python3:/home/shko/openpilot"
+export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot"
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
 export LIBGL_ALWAYS_INDIRECT=1
 추가  CTRL + X  ->  Y
-
-sudo apt update ; upgrade ; sudo apt install x11-apps -y ; sudo apt install python3-pip ; curl https://bootstrap.pypa.io/get\-pip.py \-o get\-pip.py ; python3 get-pip.py ; pip3 install pip --upgrade ; sudo pip install --ignore-installed poetry ; sudo apt install python3-testresources ;  poetry init
-pip3 install numpy ;  sudo apt install scons ; pip3 install  scons ; curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-sudo apt install git-lfscurl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash ; sudo apt-get update ; sudo apt install git-lfs; ; cd ~ ; git clone --recurse-submodules https://github.com/commaai/openpilot.git ; cd ~/openpilot ; git lfs pull ;  tools/ubuntu_setup.sh ; cd ~/openpilot ;poetry shell ; scons -u -j$(nproc) ; cd ~/openpilot/tools/plotjuggler ; ./juggle.py --install
 
 
