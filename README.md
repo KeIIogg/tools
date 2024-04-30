@@ -11,7 +11,8 @@ wsl --set-default-version 2
 -wsl pakage
 https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
--vcxsrv for GUI
+-vcxsrv for GUI   (refer to : https://psychoria.tistory.com/739)
+
 https://sourceforge.net/projects/vcxsrv
 
 ![1](https://github.com/seonghoonko/plotjuggler/assets/68089983/8828b3bb-8fed-450e-b549-5b31fe0a42d6)
@@ -26,6 +27,9 @@ https://sourceforge.net/projects/vcxsrv
 
 ![6](https://github.com/seonghoonko/plotjuggler/assets/68089983/f0ca426f-c7e8-4be8-95e3-1bbe44158b69)
 
+ 
+
+- Install Ubuntu 20.04
 Choose install method [1] or [2]
 
 -Ubuntu 20.04 with wsl  [1]
