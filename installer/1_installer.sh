@@ -27,3 +27,11 @@ export DISPLAY=$WSL_IF_IP:0;
 unset LIBGL_ALWAYS_INDIRECT;
 cd ~/openpilot&&tools/ubuntu_setup.sh ; 
 cd ~/openpilot&&poetry shell ; 
+
+# build openpilot 
+cd ~/openpilot;
+scons -u -j$(nproc) ; 
+
+# install plotjuggler
+cd ~/openpilot/tools/plotjuggler ; 
+./juggle.py --install ;
