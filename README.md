@@ -6,10 +6,14 @@ Install plotjuggler in wsl(windows)
 - CMD or Powershell in Administrator authority
   
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
 wsl --set-default-version 2
 
+
 -wsl pakage
+
 https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
 -vcxsrv for GUI   (refer to : https://psychoria.tistory.com/739)
@@ -31,12 +35,15 @@ https://sourceforge.net/projects/vcxsrv
  
 
 - Install Ubuntu 20.04
+- 
 Choose install method [1] or [2]
 
 -Ubuntu 20.04 with wsl  [1]
+
 https://apps.microsoft.com/detail/9mttcl66cpxj?hl=en-us&gl=US
 
 -Ubuntu 20.04 with wsl  [2]
+
 open cmd in Administrator authority
 
 wsl --unregister ubuntu 
@@ -48,6 +55,7 @@ Install app ubuntu(20.04) in setting in windows 10
 wsl --install -d Ubuntu-20.04
 
 # Install  (in ubuntu)
+
 excute installer command in ubuntu 20.04
 
 cd ~; git clone https://github.com/seonghoonko/plotjuggler.git ; 
