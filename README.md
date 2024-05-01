@@ -49,7 +49,9 @@ wsl --install -d Ubuntu-20.04
 # Install  (in ubuntu)
 excute installer command in ubuntu 20.04
 
-cd ~; git clone -n --depth=1 --filter=tree:0 https://github.com/seonghoonko/plotjuggler.git && cd ~/plotjuggler && git sparse-checkout set --no-cone installer && git checkout && cd ~/plotjuggler/installer && chmod +x installer.sh ; ./installer.sh ; 
+cd ~; git clone https://github.com/seonghoonko/plotjuggler.git ; 
+cd ~/plotjuggler/installer ;
+chmod +x installer.sh ; ./installer.sh ; 
 
 # Execute 
 
