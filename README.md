@@ -48,7 +48,7 @@ open cmd in Administrator authority
 
 wsl --unregister ubuntu 
 
-wsl –unregister Ubuntu-20.04
+wsl –-unregister Ubuntu-20.04
 
 Install app ubuntu(20.04) in setting in windows 10
 
