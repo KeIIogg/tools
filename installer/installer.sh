@@ -6,7 +6,7 @@ mv ~/plotjuggler/installer/id_rsa.pub ~/.comma/persist/comma/id_rsa.pub;
 mv ~/plotjuggler/installer/id_rsa ~/.comma/persist/comma/id_rsa;
 cd ~;
 sudo apt update ; 
-upgrade ; 
+sudo apt upgrade ; 
 sudo apt install x11-apps -y ;
 sudo apt install python3-pip ;
 curl https://bootstrap.pypa.io/get\-pip.py \-o get\-pip.py ; 
