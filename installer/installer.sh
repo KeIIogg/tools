@@ -19,7 +19,7 @@ echo "***********************Install x11-apps..."
 sudo apt install -y x11-apps ;
 
 echo "***********************Install python3-pip..."
-sudo apt install python3-pip ;
+sudo apt install -y python3-pip ;
 curl https://bootstrap.pypa.io/get\-pip.py \-o get\-pip.py ; 
 python3 get-pip.py ; 
 pip3 install pip --upgrade ; 
@@ -47,7 +47,7 @@ git clone --recurse-submodules https://github.com/commaai/openpilot.git ;
 cd ~/openpilot ; 
 git lfs pull ; 
 
-echo "***********************Excute cmd line for plotjuggler..."
+echo "***********************Excute command line for Plot juggler..."
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot";
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0";
 export LIBGL_ALWAYS_INDIRECT=1;
