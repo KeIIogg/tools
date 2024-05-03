@@ -1,27 +1,24 @@
 #!/usr/bin/bash
-echo "Start installer.sh for Plot juggler..."
+echo "***********************Start installer.sh for Plot juggler..."
 
-echo "Edit 'sudoers' for no password in setup..."
-sed -i '%USER ALL=(ALL) NOPASSWD: ALL' /etc/sudoers
-
-echo "Add command line for start up Plotjuggler..."
+echo "***********************Add command line for start up Plotjuggler..."
 mv ~/.bashrc ~/.bashrc.bak;
 mv ~/plotjuggler/installer/.bashrc ~/.bashrc;
 
-echo "Add SSH KEY's for SHKO..."
+echo "***********************Add SSH KEY's for SHKO..."
 mkdir -p ~/.comma/persist/comma; 
 mv ~/plotjuggler/installer/id_rsa.pub ~/.comma/persist/comma/id_rsa.pub;
 mv ~/plotjuggler/installer/id_rsa ~/.comma/persist/comma/id_rsa;
 
-echo "Ubuntu update && upgrade..."
+echo "***********************Ubuntu update && upgrade..."
 cd ~;
 sudo apt update -y ; 
 sudo apt upgrade -y ; 
 
-echo "Install x11-apps..."
+echo "***********************Install x11-apps..."
 sudo apt install -y x11-apps ;
 
-echo "Install python3-pip..."
+echo "***********************Install python3-pip..."
 sudo apt install python3-pip ;
 curl https://bootstrap.pypa.io/get\-pip.py \-o get\-pip.py ; 
 python3 get-pip.py ; 
@@ -29,45 +26,45 @@ pip3 install pip --upgrade ;
 sudo pip install --ignore-installed poetry ; 
 sudo apt install -y python3-testresources ;  
 
-echo "Poetry initialization..."
+echo "***********************Poetry initialization..."
 poetry init –n ; 
 
-echo "Install numpy..."
+echo "***********************Install numpy..."
 pip3 install numpy ; 
 
-echo "Install scons..."
+echo "***********************Install scons..."
 sudo apt install scons ; 
 pip3 install scons ; 
 
-echo "Install git-LFS..."
+echo "***********************Install git-LFS..."
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash ; 
 sudo apt-get update ; 
 sudo apt install git-lfs; 
 
-echo "Download OPENPILOT with LFS..."
+echo "***********************Download OPENPILOT with git LFS..."
 cd ~ ; 
 git clone --recurse-submodules https://github.com/commaai/openpilot.git ;
 cd ~/openpilot ; 
 git lfs pull ; 
 
-echo "Excute cmd line for plotjuggler..."
+echo "***********************Excute cmd line for plotjuggler..."
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot";
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0";
 export LIBGL_ALWAYS_INDIRECT=1;
 export DISPLAY=$WSL_IF_IP:0;
 unset LIBGL_ALWAYS_INDIRECT;
 
-echo "Setup for OPENPILOT..."
+echo "***********************Setup for OPENPILOT..."
 cd ~/openpilot&&tools/ubuntu_setup.sh ; 
 
-echo "Excute poetry shell..."
+echo "***********************Excute poetry shell..."
 cd ~/openpilot&&poetry shell&&
 
-echo "Build OPENPILOT..."
+echo "***********************Build OPENPILOT..."
 cd ~/openpilot;
 scons -u -j$(nproc)&&
 
-echo "Install plotjuggler..." 
+echo "***********************Install plotjuggler..." 
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot";
 export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0";
 export LIBGL_ALWAYS_INDIRECT=1;
@@ -75,6 +72,6 @@ export DISPLAY=$WSL_IF_IP:0;
 cd ~/openpilot/tools/plotjuggler ; 
 ./juggle.py --install ;
 
-echo "Set up for Plot juggler is done" 
-echo "Please restart Ubuntu" 
-echo "type 'op_plot'" 
+echo "***********************Set up for Plot juggler is done" 
+echo "***********************Please restart Ubuntu" 
+echo "***********************type 'op_plot'" 
