@@ -1,13 +1,14 @@
 #!/usr/bin/bash
-echo "Start installer for Plot juggler..."
-echo "Change authority 'root'..."
-su -
+echo "Start installer.sh for Plot juggler..."
+
+echo "Edit 'sudoers' for no password in setup..."
+sed -i '%USER ALL=(ALL) NOPASSWD: ALL' /etc/sudoers
 
 echo "Add command line for start up Plotjuggler..."
 mv ~/.bashrc ~/.bashrc.bak;
 mv ~/plotjuggler/installer/.bashrc ~/.bashrc;
 
-echo "Add SSH KEY's..."
+echo "Add SSH KEY's for SHKO..."
 mkdir -p ~/.comma/persist/comma; 
 mv ~/plotjuggler/installer/id_rsa.pub ~/.comma/persist/comma/id_rsa.pub;
 mv ~/plotjuggler/installer/id_rsa ~/.comma/persist/comma/id_rsa;
@@ -21,27 +22,27 @@ echo "Install x11-apps..."
 sudo apt install -y x11-apps ;
 
 echo "Install python3-pip..."
-sudo apt install -y python3-pip ;
+sudo apt install python3-pip ;
 curl https://bootstrap.pypa.io/get\-pip.py \-o get\-pip.py ; 
 python3 get-pip.py ; 
-pip3 install -y pip --upgrade ; 
-sudo pip install -y --ignore-installed poetry ; 
+pip3 install pip --upgrade ; 
+sudo pip install --ignore-installed poetry ; 
 sudo apt install -y python3-testresources ;  
 
 echo "Poetry initialization..."
 poetry init –n ; 
 
 echo "Install numpy..."
-pip3 install -y numpy ; 
+pip3 install numpy ; 
 
 echo "Install scons..."
-sudo apt install -y scons ; 
-pip3 install -y scons ; 
+sudo apt install scons ; 
+pip3 install scons ; 
 
 echo "Install git-LFS..."
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash ; 
-sudo apt-get update -y ; 
-sudo apt install -y git-lfs; 
+sudo apt-get update ; 
+sudo apt install git-lfs; 
 
 echo "Download OPENPILOT with LFS..."
 cd ~ ; 
@@ -73,9 +74,6 @@ export LIBGL_ALWAYS_INDIRECT=1;
 export DISPLAY=$WSL_IF_IP:0;
 cd ~/openpilot/tools/plotjuggler ; 
 ./juggle.py --install ;
-
-echo "Change authority USER..." 
-su - $username
 
 echo "Set up for Plot juggler is done" 
 echo "Please restart Ubuntu" 
