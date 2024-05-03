@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 mv ~/.bashrc ~/.bashrc.bak;
 mv ~/plotjuggler/installer/.bashrc ~/.bashrc;
+mkdir -p ~/.comma/persist/comma; 
+mv ~/plotjuggler/installer/id_rsa.pub ~/.comma/persist/comma/id_rsa.pub;
+mv ~/plotjuggler/installer/id_rsa ~/.comma/persist/comma/id_rsa;
 cd ~;
 sudo apt update ; 
 upgrade ; 
