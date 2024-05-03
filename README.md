@@ -1,7 +1,4 @@
-# plotjuggler
-Install plotjuggler in wsl(windows)
-
-# Install  (in windows 10)
+# 1. Install WSL2 (in windows 10)
 
 - CMD or Powershell in Administrator authority
   
@@ -11,12 +8,11 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 wsl --set-default-version 2
 
-
--wsl pakage
+# 2. Download WSL pakage
 
 https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
--vcxsrv for GUI   (refer to : https://psychoria.tistory.com/739)
+# 3. Install vcxsrv for GUI   (refer to : https://psychoria.tistory.com/739)
 
 https://sourceforge.net/projects/vcxsrv
 
@@ -34,39 +30,30 @@ https://sourceforge.net/projects/vcxsrv
 
  
 
-- Install Ubuntu 20.04
-- 
+# 4. Install Ubuntu
 Choose install method [1] or [2]
 
--Ubuntu 20.04 with wsl  [1]
+# 4-[1]. Ubuntu 20.04 with wsl  
 
 https://apps.microsoft.com/detail/9mttcl66cpxj?hl=en-us&gl=US
 
--Ubuntu 20.04 with wsl  [2]
+# 4-[2]. Ubuntu 20.04 with wsl(in CMD or Powershell)
 
-open cmd in Administrator authority
 
 wsl --unregister ubuntu 
 
 wsl –-unregister Ubuntu-20.04
 
-Install app ubuntu(20.04) in setting in windows 10
-
 wsl --install -d Ubuntu-20.04
 
-# Install  (in ubuntu)
+# 5. Install plotjuggler  (in ubuntu)
 
-excute installer command in ubuntu 20.04
 
 cd ~; git clone https://github.com/seonghoonko/plotjuggler.git ; 
 cd ~/plotjuggler/installer ;
 chmod +x installer.sh ; ./installer.sh ; 
 
-# Execute 
+# Execute (in ubuntu)
 
 op_plot
 
-# Environment
-
-Openpilot is worked for ubuntu 20.04
-for openpilot debugging, WSL2(windows)
