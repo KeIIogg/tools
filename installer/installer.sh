@@ -28,11 +28,11 @@ export LIBGL_ALWAYS_INDIRECT=1;
 export DISPLAY=$WSL_IF_IP:0;
 unset LIBGL_ALWAYS_INDIRECT;
 cd ~/openpilot&&tools/ubuntu_setup.sh ; 
-cd ~/openpilot&&poetry shell ; 
+cd ~/openpilot&&poetry shell&&
 
 # build openpilot 
 cd ~/openpilot;
-scons -u -j$(nproc) ; 
+scons -u -j$(nproc)&&
 
 # install plotjuggler
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot";
