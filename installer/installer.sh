@@ -14,8 +14,8 @@ echo "***********************Check bashrc...***********************"
 echo ""
 echo ""
 echo ""
-﻿basrc=~/.bashrc.bak
-if [ -f "$﻿basrc" ]; then
+﻿basrc="~/.bashrc.bak"
+if [ -e "$﻿basrc" ]; then
     echo "***********************$﻿basrc is already changed. then skip***********************"
     echo ""
     echo ""
@@ -48,8 +48,8 @@ echo "***********************Check id_rsa & id_rsa_pub...***********************
 echo ""
 echo ""
 echo ""
-﻿id_rsa=~/.comma/persist/comma/id_rsa
-if [ -f "$﻿id_rsa" ]; then
+﻿id_rsa="~/.comma/persist/comma/id_rsa"
+if [ -e "$﻿id_rsa" ]; then
     echo "***********************$﻿id_rsa exists. then skip***********************"
     echo ""
     echo ""
