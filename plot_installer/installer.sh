@@ -46,7 +46,7 @@ echo "***********************Check 'id_rsa' & 'id_rsa_pub'...*******************
 echo ""
 echo ""
 echo ""
-if [ -d /home/$USER/.comma/persist/comma/id_rsa ]
+if [ -e /home/$USER/.comma/persist/comma/id_rsa ]
 then
     echo "***********************﻿'id_rsa' exists. then skip***********************"
     echo ""
