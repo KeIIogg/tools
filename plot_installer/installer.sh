@@ -10,32 +10,30 @@ echo ""
 echo ""
 echo ""
 echo ""
-echo "***********************Check bashrc...***********************"
+echo "***********************Check '.bashrc'...***********************"
 echo ""
 echo ""
 echo ""
 ﻿basrc="/home/$USER/.bashrc.bak"
-if [ -e $﻿basrc ]; then
-    echo "***********************$﻿basrc is already changed. then skip***********************"
+if [ -e $﻿basrc ] then
+    echo "*********************** '.basrc' is already changed. then skip***********************"
     echo ""
     echo ""
     echo ""
 else
-    echo "*********************** $﻿basrc is need to add new command line!***********************"
+    echo ""
+    echo ""
+    echo "*********************** Add new command line in '.﻿basrc'...***********************"
     echo ""
     echo ""
     echo ""
-    echo "*********************** Add new command line in $﻿basrc...***********************"
+    cp -r /home/$USER/.bashrc /home/$USER/.bashrc.bak
+    cp -r /home/$USER/tools/plot_installer/.bashrc /home/$USER/.bashrc
+    echo "*********************** Add new command line in '.basrc'***********************[[complete!!]]"
     echo ""
     echo ""
     echo ""
-    mv /home/$USER/.bashrc /home/$USER/.bashrc.bak;
-    mv /home/$USER/tools/plot_installer/.bashrc /home/$USER/.bashrc;
-    echo "*********************** Add new command line in $﻿basrc***********************[[complete!!]]"
-    echo ""
-    echo ""
-    echo ""
-fi
+fi;
 echo "======================================================================="
 echo "***********************Add SSH KEY's for SHKO...***********************"
 echo "======================================================================="
@@ -44,31 +42,31 @@ echo ""
 echo ""
 echo ""
 echo ""
-echo "***********************Check id_rsa & id_rsa_pub...***********************"
+echo "***********************Check 'id_rsa' & 'id_rsa_pub'...***********************"
 echo ""
 echo ""
 echo ""
 ﻿id_rsa="/home/$USER/.comma/persist/comma/id_rsa"
-if [ -e $﻿id_rsa ]; then
-    echo "***********************$﻿id_rsa exists. then skip***********************"
+if [ -d $﻿id_rsa ] then
+    echo "***********************﻿'id_rsa' exists. then skip***********************"
     echo ""
     echo ""
     echo ""
 else
-    echo "*********************** Add new commandline in $﻿id_rsa...***********************"
+    echo "*********************** Add new commandline in ﻿'id_rsa'...***********************"
     echo ""
     echo ""
     echo ""
     mkdir -p /home/$USER/.comma/persist/comma; 
-    mv /home/$USER/tools/plot_installer/id_rsa.pub /home/$USER/.comma/persist/comma/id_rsa.pub;
-    mv /home/$USER/tools/plot_installer/id_rsa /home/$USER/.comma/persist/comma/id_rsa;
-    echo "*********************** Add new commandline in $﻿id_rsa***********************[[complete!!]]"
+    cp -r /home/$USER/tools/plot_installer/id_rsa.pub /home/$USER/.comma/persist/comma/id_rsa.pub;
+    cp -r /home/$USER/tools/plot_installer/id_rsa /home/$USER/.comma/persist/comma/id_rsa;
+    echo "*********************** Add new commandline in 'id_rsa'***********************[[complete!!]]"
     echo ""
     echo ""
     echo ""
     echo ""
     echo ""
-fi
+fi;
 echo "========================================================================="
 echo "***********************Ubuntu update && upgrade...***********************"
 echo "========================================================================="
