@@ -24,7 +24,7 @@ cls
 @echo. 
 @echo              [Must be Install SEQUENTIALLY !]
 @echo.            
-@echo       (1) Set up for install (in windows) [NEED TO REBOOT]
+@echo           (1) Set up for install (in windows) [NEED TO REBOOT]
 @echo           (2) Install tools for ubuntu (in windows)
 @echo           (3) Install tools for plotjuggle (in ubuntu) 
 @echo.
