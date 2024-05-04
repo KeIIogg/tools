@@ -81,6 +81,7 @@ wsl --set-default-version 2
 @echo.
 @echo.
 :reboot
+cls
 @echo =====================================
 @echo                   [ Need to reboot for install ]
 @echo.                          
