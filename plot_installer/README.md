@@ -1,8 +1,13 @@
 # . Automatic installer
-## All files must be run as administrator
- 1. download files (1.bat, 2.bat, 3.ps1, i.sh)
- 2. run sequentially   1 -> 2-> 3
-   END!
+## need to run as administrator
+ 1. download files (installer.bat, installer.sh)
+ 2. run sequentially in installer.bat
+
+END!
+
+## Execute (in ubuntu)
+
+op_plot
 
 
 # . Manual install
