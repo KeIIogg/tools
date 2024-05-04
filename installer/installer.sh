@@ -242,7 +242,7 @@ echo ""
 echo ""
 echo ""
 echo ""
-cd ~/openpilot&&poetry shell&&
+cd ~/openpilot&&poetry shell&&sleep 15;
 echo "***********************Excute poetry shell***********************[[complete!!]]"
 echo ""
 echo ""
