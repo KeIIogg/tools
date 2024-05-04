@@ -5,7 +5,7 @@
    END!
 
 
-# 2. Manual installer
+# 2. Manual install
 ## 2-1. Install WSL2 (in windows 10)
 ### CMD or Powershell in Administrator authority
   
