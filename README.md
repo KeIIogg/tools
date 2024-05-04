@@ -1,13 +1,13 @@
-# 0. Simple installer
+# 1. Automatic installer
 
  1. download files (1.bat, 2.bat, 3.ps1, i.sh)
  2. run sequentially   1 -> 2-> 3
    END!
 
 
-# 1. Install WSL2 (in windows 10)
-
-- CMD or Powershell in Administrator authority
+# 2. Manual installer
+## 2-1. Install WSL2 (in windows 10)
+### CMD or Powershell in Administrator authority
   
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 
@@ -15,11 +15,11 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 wsl --set-default-version 2
 
-# 2. Download WSL pakage
+## 2-2. Download WSL pakage
 
 https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
-# 3. Install vcxsrv for GUI   (refer to : https://psychoria.tistory.com/739)
+## 2-3. Install vcxsrv for GUI   (refer to : https://psychoria.tistory.com/739)
 
 https://sourceforge.net/projects/vcxsrv
 
@@ -37,14 +37,14 @@ https://sourceforge.net/projects/vcxsrv
 
  
 
-# 4. Install Ubuntu
-Choose install method [1] or [2]
+## 2-4. Install Ubuntu
+### Choose install method [1] or [2]
 
-# 4-[1]. Ubuntu 20.04 with wsl  
+## 2-4-[1]. Ubuntu 20.04 with wsl  
 
 https://apps.microsoft.com/detail/9mttcl66cpxj?hl=en-us&gl=US
 
-# 4-[2]. Ubuntu 20.04 with wsl(in CMD or Powershell)
+## 2-4-[2]. Ubuntu 20.04 with wsl(in CMD or Powershell)
 
 
 wsl --unregister ubuntu 
@@ -53,14 +53,14 @@ wsl –-unregister Ubuntu-20.04
 
 wsl --install -d Ubuntu-20.04
 
-# 5. Install plotjuggler  (in ubuntu)
+## 2-5. Install plotjuggler  (in ubuntu)
 
 
 cd ~; git clone https://github.com/seonghoonko/plotjuggler.git ; 
 cd ~/plotjuggler/installer ;
 chmod +x installer.sh ; ./installer.sh ; 
 
-# Execute (in ubuntu)
+## Execute (in ubuntu)
 
 op_plot
 
