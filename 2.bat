@@ -16,7 +16,7 @@ del /q "%~dp0\wsl_update_x64.msi"
 del /q "%~dp0\vcxsrv.exe"
 @echo -----------------------------Complete!
 @echo Execute vcxsrv......
-"C:\Program Files\VcXsrv\vcxsrv.exe"
+"C:\Program Files\VcXsrv\xlaunch.exe"
 @echo -----------------------------Complete!
 @echo Unregister Ubuntu......
 wsl --unregister Ubuntu-20.04
