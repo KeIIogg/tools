@@ -14,7 +14,7 @@ echo "***********************Check bashrc...***********************"
 echo ""
 echo ""
 echo ""
-﻿basrc="~/.bashrc.bak"
+﻿basrc="/home/$USER/.bashrc.bak"
 if [ -e $﻿basrc ]; then
     echo "***********************$﻿basrc is already changed. then skip***********************"
     echo ""
@@ -29,8 +29,8 @@ else
     echo ""
     echo ""
     echo ""
-    mv ~/.bashrc ~/.bashrc.bak;
-    mv ~/plotjuggler/installer/.bashrc ~/.bashrc;
+    mv /home/$USER/.bashrc /home/$USER/.bashrc.bak;
+    mv /home/$USER/tools/plot_installer/.bashrc /home/$USER/.bashrc;
     echo "*********************** Add new command line in $﻿basrc***********************[[complete!!]]"
     echo ""
     echo ""
@@ -48,7 +48,7 @@ echo "***********************Check id_rsa & id_rsa_pub...***********************
 echo ""
 echo ""
 echo ""
-﻿id_rsa="~/.comma/persist/comma/id_rsa"
+﻿id_rsa="/home/$USER/.comma/persist/comma/id_rsa"
 if [ -e $﻿id_rsa ]; then
     echo "***********************$﻿id_rsa exists. then skip***********************"
     echo ""
@@ -59,9 +59,9 @@ else
     echo ""
     echo ""
     echo ""
-    mkdir -p ~/.comma/persist/comma; 
-    mv ~/plotjuggler/installer/id_rsa.pub ~/.comma/persist/comma/id_rsa.pub;
-    mv ~/plotjuggler/installer/id_rsa ~/.comma/persist/comma/id_rsa;
+    mkdir -p /home/$USER/.comma/persist/comma; 
+    mv /home/$USER/tools/plot_installer/id_rsa.pub /home/$USER/.comma/persist/comma/id_rsa.pub;
+    mv /home/$USER/tools/plot_installer/id_rsa /home/$USER/.comma/persist/comma/id_rsa;
     echo "*********************** Add new commandline in $﻿id_rsa***********************[[complete!!]]"
     echo ""
     echo ""
