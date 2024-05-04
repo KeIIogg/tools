@@ -1,3 +1,10 @@
+# 0. Simple installer
+
+ 1. download files (1.bat, 2.bat, 3.ps1, i.sh)
+ 2. run sequentially   1 -> 2-> 3
+   END!
+
+
 # 1. Install WSL2 (in windows 10)
 
 - CMD or Powershell in Administrator authority
