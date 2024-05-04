@@ -15,7 +15,7 @@ echo ""
 echo ""
 echo ""
 ﻿basrc="~/.bashrc.bak"
-if [ -e "$﻿basrc" ]; then
+if [ -e $﻿basrc ]; then
     echo "***********************$﻿basrc is already changed. then skip***********************"
     echo ""
     echo ""
@@ -49,7 +49,7 @@ echo ""
 echo ""
 echo ""
 ﻿id_rsa="~/.comma/persist/comma/id_rsa"
-if [ -e "$﻿id_rsa" ]; then
+if [ -e $﻿id_rsa ]; then
     echo "***********************$﻿id_rsa exists. then skip***********************"
     echo ""
     echo ""
