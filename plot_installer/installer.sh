@@ -190,7 +190,10 @@ echo ""
 echo ""
 echo ""
 cd ~ ; 
-git clone --recurse-submodules https://github.com/commaai/openpilot.git ;
+# Fast clone
+git clone --filter=blob:none --recurse-submodules --also-filter-submodules https://github.com/commaai/openpilot.git
+# Full clone
+#git clone --recurse-submodules https://github.com/commaai/openpilot.git ;
 cd ~/openpilot ; 
 git lfs pull ; 
 echo "***********************Download OPENPILOT with git LFS***********************[[complete!!]]"
