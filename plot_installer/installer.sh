@@ -173,10 +173,15 @@ echo "venv 가상환경 활성화 [[완료]]"
 echo "오픈파일럿 빌드 중..."
 scons -u -j$(nproc)
 echo "오픈파일럿 빌드 [[완료]]"
+echo
+echo
 
 
-echo "Ubuntu를 재시작 후 op_plot을 입력하면 Plot juggler가 실행됩니다."
-read -n 1 -s -r -p "아무 키를 입력하면 Ubuntu가 종료됩니다..."
+source ~/.bashrc
+echo "op_set을 입력하면 기존 오픈파일럿이 빌드됩니다.."
+echo "op_plot을 입력하면 Plot juggler가 실행됩니다."
+echo "op_pc_set을 입력하면 PC용 오픈파일럿 빌드됩니다."
+echo "op_pc를 입력하면 PC용 오픈파일럿 실행됩니다."
+echo
+echo
 
-echo "Ubuntu를 종료합니다"
-sudo shutdown -h now
