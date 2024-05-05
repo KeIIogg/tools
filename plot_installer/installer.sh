@@ -31,7 +31,7 @@ commands=(
     "export LIBGL_ALWAYS_INDIRECT=1"
     "export DISPLAY=\$WSL_IF_IP:0"
     "alias op_set='cd ~/openpilot && scons -u -j\$(nproc)'"
-    "alias op_plot='cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream'"
+    "alias op_plot='cd /home/$USER/openpilot/.venv && source bin/activate && cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream'"
     "alias op_pc_set='cd ~/tools/op_pc_installer && ./installer.sh'"
     "alias op_pc='cd ~/tools/op_pc_installer && ./launch.sh'"
 )
@@ -78,6 +78,7 @@ echo "x11-apps 설치 [[완료]]"
 
 echo "Python3-pip 설치 중..."
 run_or_skip_command "pip3" "이미 설치되어 있습니다."
+sudo apt install -y python3-pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 pip3 install pip --upgrade
@@ -124,17 +125,6 @@ fi
 echo "Git LFS를 사용하여 OPENPILOT 다운로드 [[완료!!]]"
 
 
-echo "Plot juggler를 위한 명령어 실행 중..."
-export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot"
-export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
-export LIBGL_ALWAYS_INDIRECT=1
-export DISPLAY=$WSL_IF_IP:0
-echo "Plot juggler 설치 중..."
-cd ~/openpilot/tools/plotjuggler
-./juggle.py --install
-echo "Plot juggler 설치 [[완료]]"
-
-
 echo "오픈파일럿 내 필요 유틸 설치 중..."
 cd ~/openpilot && tools/ubuntu_setup.sh
 echo "오픈파일럿 내 필요 유틸 설치 [[완료]]"
@@ -147,6 +137,12 @@ echo "venv 가상환경 활성화 중..."
 cd /home/$USER/openpilot/.venv && source bin/activate
 echo "venv 가상환경 활성화 [[완료]]"
 
+echo "Plot juggler를 위한 명령어 실행 중..."
+export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot"
+export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
+export LIBGL_ALWAYS_INDIRECT=1
+export DISPLAY=$WSL_IF_IP:0
+
 echo "오픈파일럿 빌드 중..."
 scons -u -j$(nproc)
 echo "오픈파일럿 빌드 [[완료]]"
@@ -154,11 +150,21 @@ echo
 echo
 
 
+echo "Plot juggler 설치 중..."
+cd ~/openpilot/tools/plotjuggler
+./juggle.py --install
+echo "Plot juggler 설치 [[완료]]"
+
+
 source ~/.bashrc
+echo "모든 설치가 끝났습니다."
+echo
 echo "op_set을 입력하면 기존 오픈파일럿이 빌드됩니다.."
 echo "op_plot을 입력하면 Plot juggler가 실행됩니다."
 echo "op_pc_set을 입력하면 PC용 오픈파일럿 빌드됩니다."
 echo "op_pc를 입력하면 PC용 오픈파일럿 실행됩니다."
 echo
 echo
+
+
 
