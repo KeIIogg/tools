@@ -199,9 +199,9 @@ echo "Ubuntu 를 재시작 후"
 echo "op_plot 을 입력하면 Plot juggler가 실행됩니다."
 echo
 echo
-read -n 1 -s -r -p "아무키를 입력하면 Ubuntu가 재시작 됩니다"
+read -n 1 -s -r -p "아무키를 입력하면 Ubuntu가 종료됩니다"
 
 echo
 echo
-echo "Ubuntu를 재시작합니다"
-wsl --shutdown
+echo "Ubuntu를 종료합니다"
+sudo shutdown -h now
