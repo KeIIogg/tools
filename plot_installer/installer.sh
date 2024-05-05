@@ -72,155 +72,110 @@ echo
 echo ".bashrc 파일 설정이 완료되었습니다."
 echo
 echo
+#!/bin/bash
+
+# 함수: 명령어 실행 여부 확인 및 설치 스킵
+run_or_skip_command() {
+    local command="$1"
+    local skip_message="$2"
+
+    if ! command -v $command &> /dev/null
+    then
+        echo "[$command 설치 시작]"
+        eval "$command"
+        echo "[$command 설치 완료]"
+    else
+        echo "[$command 설치 스킵: $skip_message]"
+    fi
+}
+
 echo "Ubuntu 업데이트 및 업그레이드 중..."
-cd ~
 sudo apt update -y 
 sudo apt upgrade -y 
-echo
-echo
 echo "Ubuntu 업데이트 및 업그레이드 [[완료]]"
 
 
-echo
 echo "x11-apps 설치 중..."
 sudo apt install -y x11-apps
-echo
-echo
 echo "x11-apps 설치 [[완료]]"
 
 
-echo
-echo
 echo "Python3-pip 설치 중..."
-if ! command -v pip3 &> /dev/null
-then
-    sudo apt install -y python3-pip
-fi
+run_or_skip_command "pip3" "이미 설치되어 있습니다."
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 pip3 install pip --upgrade
 sudo pip install --ignore-installed poetry
 sudo apt install -y python3-testresources
-echo
-echo
 echo "Python3-pip 설치 [[완료]]"
 
 
-echo
-echo
 echo "Poetry 초기화 중..."
-if ! command -v poetry &> /dev/null
-then
-    poetry init -n
-fi
-echo
-echo
+run_or_skip_command "poetry" "이미 초기화되었습니다."
+poetry init -n
 echo "Poetry 초기화 [[완료]]"
 
 
-echo
-echo
 echo "Numpy 설치 중..."
-if ! python3 -c 'import numpy' &> /dev/null
-then
-    pip3 install numpy
-fi
-echo
-echo
+run_or_skip_command "python3 -c 'import numpy'" "이미 설치되어 있습니다."
+pip3 install numpy
 echo "Numpy 설치 [[완료]]"
 
 
-echo
-echo
 echo "Scons 설치 중..."
-sudo apt install scons
+sudo apt install -y scons
 pip3 install scons
-echo
-echo
 echo "Scons 설치 [[완료!!]]"
 
 
-echo
-echo
 echo "Git-LFS 설치 중..."
-if ! command -v git-lfs &> /dev/null
-then
-    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-    sudo apt-get update
-    sudo apt install git-lfs
-fi
-echo
-echo
+run_or_skip_command "git-lfs" "이미 설치되어 있습니다."
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt-get update
+sudo apt install git-lfs
 echo "Git-LFS 설치 [[완료!!]]"
 
 
-echo
-echo
 echo "Git LFS를 사용하여 OPENPILOT 다운로드 중..."
 cd ~
-git clone --filter=blob:none --recurse-submodules --also-filter-submodules https://github.com/commaai/openpilot.git
-cd ~/openpilot
-git lfs pull
-echo
-echo
+if [ ! -d "openpilot" ]; then
+    git clone --filter=blob:none --recurse-submodules --also-filter-submodules https://github.com/commaai/openpilot.git
+    cd ~/openpilot
+    git lfs pull
+else
+    echo "OPENPILOT 이미 다운로드되어 있습니다. 스킵합니다."
+fi
 echo "Git LFS를 사용하여 OPENPILOT 다운로드 [[완료!!]]"
 
 
-echo
-echo
 echo "Plot juggler를 위한 명령어 실행 중..."
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot"
-export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
 export LIBGL_ALWAYS_INDIRECT=1
 export DISPLAY=$WSL_IF_IP:0
-unset LIBGL_ALWAYS_INDIRECT
+echo "Plot juggler 설치 중..."
+cd ~/openpilot/tools/plotjuggler
+./juggle.py --install
+echo "Plot juggler 설치 [[완료]]"
 
 
-echo
-echo
-echo "오픈파일럿내 필요유틸 설치 중..."
-cd ~/openpilot&&tools/ubuntu_setup.sh
-echo
-echo
-echo "오픈파일럿내 필요유틸 설치 [[완료]]"
+echo "오픈파일럿 내 필요 유틸 설치 중..."
+cd ~/openpilot && tools/ubuntu_setup.sh
+echo "오픈파일럿 내 필요 유틸 설치 [[완료]]"
  
 
-echo
-echo
 echo "Poetry 가상환경 활성화 중..."
-cd ~/openpilot&&poetry shell
-echo
-echo
+cd ~/openpilot && poetry shell
 echo "Poetry 가상환경 활성화 [[완료]]"
 
 
-echo
-echo
-echo " 오픈파일럿 빌드 중..."
-scons -u -j$(nproc)&&
-echo
-echo
-echo " 오픈파일럿 빌드 [[완료]]"
+echo "오픈파일럿 빌드 중..."
+scons -u -j$(nproc)
+echo "오픈파일럿 빌드 [[완료]]"
 
 
-echo
-echo
-echo "Plot juggler 설치 중..."
-cd ~/openpilot/tools/plotjuggler&&./juggle.py --install
+echo "Ubuntu를 재시작 후 op_plot을 입력하면 Plot juggler가 실행됩니다."
+read -n 1 -s -r -p "아무 키를 입력하면 Ubuntu가 종료됩니다..."
 
-
-echo
-echo
-echo "Plot juggler 설치 [[완료]]"
-echo
-echo
-echo "Ubuntu 를 재시작 후"
-echo "op_plot 을 입력하면 Plot juggler가 실행됩니다."
-echo
-echo
-read -n 1 -s -r -p "아무키를 입력하면 Ubuntu가 종료됩니다"
-
-echo
-echo
 echo "Ubuntu를 종료합니다"
 sudo shutdown -h now
