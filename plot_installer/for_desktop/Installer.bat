@@ -7,9 +7,8 @@ chcp 65001 >nul 2>&1
 ::  %errorlevel% 값이 0보다 크면 관리자 권한으로 실행되지 않음
 if %errorlevel% NEQ 0 (
     echo 현재 관리자 권한으로 실행되지 않았습니다.
-    echo.
-    pause
     echo 종료 후 마우스 우클릭을 통해 관리자권한으로 실행해주세요
+    pause
     exit /b
 )
 echo.
