@@ -142,7 +142,7 @@ export LIBGL_ALWAYS_INDIRECT=1
 export DISPLAY=$WSL_IF_IP:0
 
 echo "오픈파일럿 빌드 중..."
-scons -u -j\$(nproc)
+scons -u -j$(nproc)
 echo "오픈파일럿 빌드 [[완료]]"
 echo
 
