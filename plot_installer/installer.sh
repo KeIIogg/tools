@@ -12,10 +12,11 @@ echo ==============================================================
 echo
 echo
 echo
+# .bashrc 파일 백업 경로 정의
 backup_bashrc="$HOME/.bashrc.bak"
 bashrc_file="$HOME/.bashrc"
 
-# .bashrc 파일이 존재하지 않는 경우 백업 생성
+# .bashrc 백업 파일이 없는 경우 .bashrc를 백업 파일로 복사
 if [ ! -f "$backup_bashrc" ]; then
     cp "$bashrc_file" "$backup_bashrc"
     echo ".bashrc 파일이 백업되었습니다: $backup_bashrc"
@@ -23,52 +24,28 @@ else
     echo ".bashrc 파일의 백업이 이미 존재합니다: $backup_bashrc"
 fi
 
-# 필요한 Alias를 추가합니다 - Plotjuggler 실행
-add_alias_if_not_exists() {
-    local alias_name="$1"
-    local alias_command="$2"
+# 명령어들을 배열로 정의
+commands=(
+    "export PYTHONPATH=\"/home/\$USER/openpilot/.venv/bin/python3:/home/\$USER/openpilot\""
+    "export DISPLAY=\"\$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0\""
+    "export LIBGL_ALWAYS_INDIRECT=1"
+    "export DISPLAY=\$WSL_IF_IP:0"
+    "alias op_set='cd ~/openpilot && scons -u -j\$(nproc)'"
+    "alias op_plot='cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream'"
+    "alias op_pc_set='cd ~/tools/op_pc_installer && ./installer.sh'"
+    "alias op_pc='cd ~/tools/op_pc_installer && ./launch.sh'"
+)
 
-    # 이미 .bashrc에 Alias가 존재하지 않는 경우 추가
-    if ! grep -qFx "alias $alias_name='$alias_command'" "$bashrc_file"; then
-        echo "$bashrc_file에 Alias '$alias_name' 추가 중"
-        echo "alias $alias_name='$alias_command'" >> "$bashrc_file"
+# .bashrc 파일에 각 명령어를 추가
+for command in "${commands[@]}"; do
+    if ! grep -qFx "$command" "$bashrc_file"; then
+        echo "$bashrc_file에 명령어 추가 중: $command"
+        echo "$command" >> "$bashrc_file"
     else
-        echo "$bashrc_file에 이미 Alias '$alias_name'이(가) 존재합니다. 스킵합니다."
+        echo "$bashrc_file에 이미 해당 명령어가 존재합니다. 스킵합니다: $command"
     fi
-}
+done
 
-# PYTHONPATH를 .bashrc에 추가합니다 - 설정되어 있지 않은 경우에만
-add_pythonpath_if_not_exists() {
-    if ! grep -qFx "export PYTHONPATH=\"/home/\$USER/openpilot/.venv/bin/python3:/home/\$USER/openpilot\"" "$bashrc_file"; then
-        echo "$bashrc_file에 PYTHONPATH 추가 중"
-        echo "export PYTHONPATH=\"/home/\$USER/openpilot/.venv/bin/python3:/home/\$USER/openpilot\"" >> "$bashrc_file"
-    else
-        echo "$bashrc_file에 이미 PYTHONPATH가 설정되어 있습니다. 스킵합니다."
-    fi
-}
-
-# DISPLAY 및 관련 설정을 .bashrc에 추가합니다 - 설정되어 있지 않은 경우에만
-add_display_settings_if_not_exists() {
-    if ! grep -qFx "export DISPLAY=\"\$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0\"" "$bashrc_file"; then
-        echo "$bashrc_file에 DISPLAY 설정 추가 중"
-        echo "export DISPLAY=\"\$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0\"" >> "$bashrc_file"
-        echo "export LIBGL_ALWAYS_INDIRECT=1" >> "$bashrc_file"
-        echo "export DISPLAY=\$WSL_IF_IP:0" >> "$bashrc_file"
-        echo "unset LIBGL_ALWAYS_INDIRECT" >> "$bashrc_file"
-    else
-        echo "$bashrc_file에 이미 DISPLAY 설정이 존재합니다. 스킵합니다."
-    fi
-}
-
-# Alias를 추가합니다 (존재하지 않는 경우)
-## 커스텀명령어 - Plotjuggler 실행. 
-add_alias_if_not_exists "op_plot" "cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream"
-## 커스텀명령어 -  PC용 오픈파일럿 셋업
-add_alias_if_not_exists "op_pc_set" "cd ~/tools/op_pc_installer && ./installer.sh"
-## 커스텀명령어 -  PC용 오픈파일럿 실행
-add_alias_if_not_exists "op_pc" "cd ~/tools/op_pc_installer && ./launch.sh"
-echo
-echo
 echo ".bashrc 파일 설정이 완료되었습니다."
 echo
 echo
