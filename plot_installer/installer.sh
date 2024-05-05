@@ -29,7 +29,7 @@ else
     echo ""
     cp -r /home/$USER/.bashrc /home/$USER/.bashrc.bak
     cp -r /home/$USER/tools/plot_installer/.bashrc /home/$USER/.bashrc
-    echo "*********************** Add new command line in '.basrc'***********************[[complete!!]]"
+    echo "***********************Add new command line in '.basrc'***********************[[complete!!]]"
     echo ""
     echo ""
     echo ""
@@ -48,12 +48,12 @@ echo ""
 echo ""
 if [ -e /home/$USER/.comma/persist/comma/id_rsa ]
 then
-    echo "***********************﻿'id_rsa' exists. then skip***********************"
+    echo "****************************﻿id_rsa is exists. then skip***********************"
     echo ""
     echo ""
     echo ""
 else
-    echo "*********************** Add new commandline in ﻿'id_rsa'...***********************"
+    echo "***********************Add new commandline in ﻿'id_rsa'...***********************"
     echo ""
     echo ""
     echo ""
