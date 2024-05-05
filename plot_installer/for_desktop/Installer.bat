@@ -179,8 +179,8 @@ echo.
 echo  '단계 4' 로 이어서 진행됩니다.
 echo.
 echo.
-wsl -- git clone https://github.com/Keiiogg/tools.git /home/shko/tools
-wsl -- chmod +x /home/shko/tools/plot_installer/installer.sh
-wsl -- /home/shko/tools/plot_installer/installer.sh
+wsl -- git clone https://github.com/Keiiogg/tools.git ~/tools
+wsl -- chmod +x ~/tools/plot_installer/installer.sh
+wsl -- ~/tools/plot_installer/installer.sh
 pause
 goto :EOF
