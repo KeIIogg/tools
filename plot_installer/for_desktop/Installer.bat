@@ -1,22 +1,27 @@
 @echo off
-cls
-pushd "%~dp0"
-title Plog juggler for OPENPILOT INSTALLER
-fltmc >nul 2>&1 || (
-	echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-	echo UAC.ShellExecute "%~fs0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
-	"%temp%\getadmin.vbs"
-	del /f /q "%temp%\getadmin.vbs"
-	exit /b
-)
-REG QUERY "HKU\S-1-5-19" >NUL 2>&1 && (
-goto menu
-) || (
-echo Right click and run as administrator...
-echo.
-pause
-goto exit
-)
+ :: BatchGotAdmin
+ :-------------------------------------
+ REM  --> Check for permissions
+ >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+
+REM --> If error flag set, we do not have admin.
+ if '%errorlevel%' NEQ '0' (
+     echo Requesting administrative privileges...
+     goto UACPrompt
+ ) else ( goto gotAdmin )
+
+:UACPrompt
+     echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+     echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
+
+    "%temp%\getadmin.vbs"
+     exit /B
+
+:gotAdmin
+     if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
+     pushd "%CD%"
+     CD /D "%~dp0"
+ :--------------------------------------
 :menu
 cls
 @echo =======================================================================
