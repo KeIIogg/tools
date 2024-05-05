@@ -61,16 +61,14 @@ add_display_settings_if_not_exists() {
 }
 
 # Alias를 추가합니다 (존재하지 않는 경우)
+## 커스텀명령어 - Plotjuggler 실행. 
 add_alias_if_not_exists "op_plot" "cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream"
+## 커스텀명령어 -  PC용 오픈파일럿 셋업
 add_alias_if_not_exists "op_pc_set" "cd ~/tools/op_pc_installer && ./installer.sh"
-add_alias_if_not_exists "op_pc_exec" "cd ~/tools/op_pc_installer && ./launch.sh"
-
-# PYTHONPATH를 설정합니다 (존재하지 않는 경우)
-add_pythonpath_if_not_exists
-
-# DISPLAY 설정을 추가합니다 (존재하지 않는 경우)
-add_display_settings_if_not_exists
-
+## 커스텀명령어 -  PC용 오픈파일럿 실행
+add_alias_if_not_exists "op_pc" "cd ~/tools/op_pc_installer && ./launch.sh"
+echo
+echo
 echo ".bashrc 파일 설정이 완료되었습니다."
 echo
 echo
@@ -83,7 +81,6 @@ echo
 echo "Ubuntu 업데이트 및 업그레이드 [[완료]]"
 
 
-echo
 echo
 echo "x11-apps 설치 중..."
 sudo apt install -y x11-apps
