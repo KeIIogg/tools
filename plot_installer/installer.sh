@@ -34,6 +34,7 @@ commands=(
     "alias op_plot='cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream'"
     "alias op_pc_set='cd ~/tools/op_pc_installer && ./installer.sh'"
     "alias op_pc='cd ~/tools/op_pc_installer && ./launch.sh'"
+    cd ~/openpilot&&poetry shell     
 )
 
 # .bashrc 파일에 각 명령어를 추가
@@ -131,9 +132,8 @@ echo "오픈파일럿 내 필요 유틸 설치 [[완료]]"
  
 
 echo "Poetry 가상환경 활성화 중..."
-cd ~/openpilot && poetry shell
+poetry shell <<EOF
 echo "Poetry 가상환경 활성화 [[완료]]"
-
 
 echo "Plot juggler를 위한 명령어 실행 중..."
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot"
@@ -142,19 +142,17 @@ export LIBGL_ALWAYS_INDIRECT=1
 export DISPLAY=$WSL_IF_IP:0
 
 echo "오픈파일럿 빌드 중..."
-scons -u -j$(nproc)
+scons -u -j\$(nproc)
 echo "오픈파일럿 빌드 [[완료]]"
 echo
-echo
-
 
 echo "Plot juggler 설치 중..."
 cd ~/openpilot/tools/plotjuggler
 ./juggle.py --install
 echo "Plot juggler 설치 [[완료]]"
 
-
 source ~/.bashrc
+EOF
 echo
 echo "모든 설치가 끝났습니다."
 echo
