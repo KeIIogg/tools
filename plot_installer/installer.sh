@@ -72,7 +72,6 @@ echo
 echo ".bashrc 파일 설정이 완료되었습니다."
 echo
 echo
-#!/bin/bash
 
 # 함수: 명령어 실행 여부 확인 및 설치 스킵
 run_or_skip_command() {
