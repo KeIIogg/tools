@@ -34,6 +34,7 @@ commands=(
     "alias op_plot='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream'"
     "alias op_pc_set='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/tools/op_pc_installer && ./installer.sh'"
     "alias op_pc='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/tools/op_pc_installer && ./launch.sh'"
+    "alias de='deactivate'"
 )
 
 # .bashrc 파일에 각 명령어를 추가
@@ -157,12 +158,15 @@ echo "Plot juggler 설치 [[완료]]"
 
 
 source ~/.bashrc
+echo
 echo "모든 설치가 끝났습니다."
+echo
 echo
 echo "op_set을 입력하면 기존 오픈파일럿이 빌드됩니다.."
 echo "op_plot을 입력하면 Plot juggler가 실행됩니다."
 echo "op_pc_set을 입력하면 PC용 오픈파일럿이 빌드됩니다."
 echo "op_pc를 입력하면 PC용 오픈파일럿이 실행됩니다."
+echo "de를 입력하면 오픈파일럿을 위한 가상환경 셋팅이 꺼집니다."
 echo
 echo
 
