@@ -30,11 +30,10 @@ commands=(
     "export DISPLAY=\"\$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0\""
     "export LIBGL_ALWAYS_INDIRECT=1"
     "export DISPLAY=\$WSL_IF_IP:0"
-    "alias op_set='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/openpilot && scons -u -j\$(nproc)'"
-    "alias op_plot='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream'"
-    "alias op_pc_set='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/tools/op_pc_installer && ./installer.sh'"
-    "alias op_pc='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/tools/op_pc_installer && ./launch.sh'"
-    "alias de='deactivate'"
+    "alias op_set='cd ~/openpilot && scons -u -j\$(nproc)'"
+    "alias op_plot='cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream'"
+    "alias op_pc_set='cd ~/tools/op_pc_installer && ./installer.sh'"
+    "alias op_pc='cd ~/tools/op_pc_installer && ./launch.sh'"
 )
 
 # .bashrc 파일에 각 명령어를 추가
@@ -131,12 +130,10 @@ cd ~/openpilot && tools/ubuntu_setup.sh
 echo "오픈파일럿 내 필요 유틸 설치 [[완료]]"
  
 
-#echo "Poetry 가상환경 활성화 중..."
-#cd ~/openpilot && poetry shell
-#echo "Poetry 가상환경 활성화 [[완료]]"
-echo "venv 가상환경 활성화 중..."
-cd /home/$USER/openpilot/.venv && source bin/activate
-echo "venv 가상환경 활성화 [[완료]]"
+echo "Poetry 가상환경 활성화 중..."
+cd ~/openpilot && poetry shell
+echo "Poetry 가상환경 활성화 [[완료]]"
+
 
 echo "Plot juggler를 위한 명령어 실행 중..."
 export PYTHONPATH="/home/$USER/openpilot/.venv/bin/python3:/home/$USER/openpilot"
