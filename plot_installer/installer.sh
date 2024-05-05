@@ -117,7 +117,7 @@ echo "Git-LFS 설치 [[완료!!]]"
 echo "Git LFS를 사용하여 OPENPILOT 다운로드 중..."
 cd ~
 if [ ! -d "openpilot" ]; then
-    git clone --filter=blob:none --recurse-submodules --also-filter-submodules https://github.com/commaai/openpilot.git
+    git clone --recurse-submodules https://github.com/commaai/openpilot.git
     cd ~/openpilot
     git lfs pull
 else
