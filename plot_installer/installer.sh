@@ -30,10 +30,10 @@ commands=(
     "export DISPLAY=\"\$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0\""
     "export LIBGL_ALWAYS_INDIRECT=1"
     "export DISPLAY=\$WSL_IF_IP:0"
-    "alias op_set='cd ~/openpilot && scons -u -j\$(nproc)'"
-    "alias op_plot='cd /home/$USER/openpilot/.venv && source bin/activate && cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream'"
-    "alias op_pc_set='cd ~/tools/op_pc_installer && ./installer.sh'"
-    "alias op_pc='cd ~/tools/op_pc_installer && ./launch.sh'"
+    "alias op_set='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/openpilot && scons -u -j\$(nproc)'"
+    "alias op_plot='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream'"
+    "alias op_pc_set='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/tools/op_pc_installer && ./installer.sh'"
+    "alias op_pc='cd /home/$USER/openpilot/.venv && source bin/activate&&cd ~/tools/op_pc_installer && ./launch.sh'"
 )
 
 # .bashrc 파일에 각 명령어를 추가
