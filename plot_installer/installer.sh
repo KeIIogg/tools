@@ -34,7 +34,7 @@ commands=(
     "alias op_plot='cd ~/openpilot/tools/plotjuggler && ./juggle.py --stream'"
     "alias op_pc_set='cd ~/tools/op_pc_installer && ./installer.sh'"
     "alias op_pc='cd ~/tools/op_pc_installer && ./launch.sh'"
-    cd ~/openpilot&&poetry shell     
+    "cd ~/openpilot&&poetry shell"     
 )
 
 # .bashrc 파일에 각 명령어를 추가
