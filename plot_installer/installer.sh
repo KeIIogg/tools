@@ -132,7 +132,7 @@ echo "오픈파일럿 내 필요 유틸 설치 [[완료]]"
  
 
 echo "Poetry 가상환경 활성화 중..."
-poetry shell <<EOF
+poetry shell
 echo "Poetry 가상환경 활성화 [[완료]]"
 
 echo "Plot juggler를 위한 명령어 실행 중..."
@@ -152,7 +152,7 @@ cd ~/openpilot/tools/plotjuggler
 echo "Plot juggler 설치 [[완료]]"
 
 source ~/.bashrc
-EOF
+
 echo
 echo "모든 설치가 끝났습니다."
 echo
