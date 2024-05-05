@@ -164,10 +164,12 @@ cd ~/openpilot && tools/ubuntu_setup.sh
 echo "오픈파일럿 내 필요 유틸 설치 [[완료]]"
  
 
-echo "Poetry 가상환경 활성화 중..."
-cd ~/openpilot && poetry shell
-echo "Poetry 가상환경 활성화 [[완료]]"
-
+#echo "Poetry 가상환경 활성화 중..."
+#cd ~/openpilot && poetry shell
+#echo "Poetry 가상환경 활성화 [[완료]]"
+echo "venv 가상환경 활성화 중..."
+cd /home/$USER/openpilot/.venv && source bin/activate
+echo "venv 가상환경 활성화 [[완료]]"
 
 echo "오픈파일럿 빌드 중..."
 scons -u -j$(nproc)
