@@ -1,249 +1,184 @@
 @echo off
- :: BatchGotAdmin
- :-------------------------------------
- REM  --> Check for permissions
- >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+chcp 65001 >nul 2>&1
 
-REM --> If error flag set, we do not have admin.
- if '%errorlevel%' NEQ '0' (
-     echo Requesting administrative privileges...
-     goto UACPrompt
- ) else ( goto gotAdmin )
+:: 관리자 권한으로 실행되었는지 확인
+>nul 2>&1 "%SYSTEMROOT%\System32\cacls.exe" "%SYSTEMROOT%\System32\config\system"
 
-:UACPrompt
-     echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-     echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
+::  %errorlevel% 값이 0보다 크면 관리자 권한으로 실행되지 않음
+if %errorlevel% NEQ 0 (
+    echo 현재 관리자 권한으로 실행되지 않았습니다.
+    echo.
+    pause
+    echo 종료 후 마우스 우클릭을 통해 관리자권한으로 실행해주세요
+    exit /b
+)
+echo.
+echo 현재 관리자 권한으로 실행 중입니다.
+echo.
 
-    "%temp%\getadmin.vbs"
-     exit /B
+setlocal enableDelayedExpansion
 
-:gotAdmin
-     if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
-     pushd "%CD%"
-     CD /D "%~dp0"
- :--------------------------------------
-:menu
-cls
-@echo =======================================================================
-@echo              Plot jugger installer for openpilot
-@echo. 
-@echo              [Must be Install SEQUENTIALLY !]
-@echo.            
-@echo           (1) Set up for install (in windows) [NEED TO REBOOT]
-@echo           (2) Install tools for ubuntu (in windows)
-@echo           (3) Install tools for plotjuggle (in ubuntu) 
-@echo.
-@echo ========================================================================
-@echo.                 
-set /p choice= Make your selection : 
-set choice=%choice:~0,1%
-if /i "%choice%"=="1" goto step1
-if /i "%choice%"=="2" goto step2
-if /i "%choice%"=="3" goto step3
-goto menu
+:: xlaunch.exe 파일의 존재 여부 확인
+if exist "C:\Program Files (x86)\VcXsrv\xlaunch.exe" (
+    :: xlaunch.exe가 존재하는 경우, Step3으로 이동
+    echo 단계 3 부터 이어서 설치 진행됩니다.
+    echo.
+    goto Step3
+) else (
+    :: xlaunch.exe가 존재하지 않는 경우, WSL 기능 상태 확인
+    wsl --list --online >nul 2>&1
+    if %errorlevel% equ 0 (
+        :: WSL이 활성화된 경우, Step2로 이동
+        echo 단계 2 부터 이어서 설치 진행됩니다.
+        echo.
+        goto Step2
+    ) else (
+        :: WSL이 비활성화된 경우, Step1로 이동
+        echo.
+        goto Step1
+    )
+)
 
-:step1
-cls
-@echo.
-@echo.
-@echo Enable Windows-Subsystem-Linux.....
-@echo.
-@echo.
-@echo.
+:Step1
+echo.
+echo ==============================================================
+echo 단계 1: Windows Subsystem for Linux (WSL) 설정
+echo ==============================================================
+echo                Plot juggler 인스톨러
+echo.
+echo            [설치는 순차적으로 진행되어야 합니다!]
+echo ==============================================================
+echo.
+echo.
+echo  WSL 활성화 중...
+echo.
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-@echo.
-@echo.
-@echo.
-@echo.
-@echo ----------------------Complete!
-@echo.
-@echo.
-@echo.
-@echo Enable VirtualMachinePlatform.....
-@echo.
-@echo.
-@echo.
+echo.
+echo  WSL 설치 완료.
+echo.
+echo.
+echo  가상 머신 플랫폼 활성화 중...
+echo.
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-@echo.
-@echo.
-@echo.
-@echo.
-@echo ----------------------Complete!
-@echo.
-@echo.
-@echo.
-@echo Set WSL2.....
-@echo.
-@echo.
-@echo.
+echo.
+echo  가상 머신 플랫폼 활성화 완료.
+echo.
+echo.
+echo  WSL2 기본 버전 설정 중...
+echo.
 wsl --set-default-version 2
-@echo.
-@echo.
-@echo.
-@echo.
-@echo ----------------------Complete!
-@echo.
-@echo.
-@echo.
-:reboot
-cls
-@echo =====================================
-@echo                   [ Need to reboot for install ]
-@echo.                          
-@echo               If you want reboot now, 'y' or not  'n'
-@echo ======================================
-@echo.
-set /p choice2=  Make your selection:
-set choice2=%choice2:~0,1%
-if /i "%choice2%"=="y" goto yes
-if /i "%choice2%"=="n" goto no
-goto reboot
+echo.
+echo  WSL2 기본 버전 설정 완료.
+echo.
+echo.
+echo.
+echo ==============================================================
+echo  계속하려면 아무 키나 눌러 재부팅하세요... 
+echo.
+echo  재부팅 후 설치 스크립트를 다시 실행하세요.
+echo ==============================================================
+echo.
+pause >nul
 
-:yes
-cls
+echo.
+echo  재부팅 중...
+echo.
 shutdown -r -t 0
+echo.
+goto :EOF
 
-pause
-goto exit
+:Step2
+echo.
+echo ==============================================================
+echo 단계 2: 필요한 패키지 및 도구 설치
+echo ==============================================================
+echo                Plot juggler 인스톨러
+echo.
+echo            [설치는 순차적으로 진행되어야 합니다!]
+echo ==============================================================
+echo.
+echo.
 
-:no
-cls
-@echo.
-@echo.
-@echo.
-@echo Cancel reboot...
-@echo.
-@echo.
-@echo ======================================================================
-@echo However, this is a process that definitely requires a reboot. After reboot, proceed with step.2
-@echo ======================================================================
-
-pause
-goto menu
-
-
-:step2
-cls
-@echo.
-@echo.
-@echo.
-@echo.
-@echo Download WSL Package......
-@echo.
-@echo.
-@echo.
+echo .
+echo  WSL 패키지 다운로드 중...
+echo.
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi','%~dp0\wsl_update_x64.msi')"
-@echo.
-@echo.
-@echo.
-@echo -----------------------------Complete!
-@echo.
-@echo.
-@echo.
-@echo Download vcxsrv(for GUI)......
-@echo.
-@echo.
-@echo.
+echo.
+echo  WSL 패키지 다운로드 완료.
+echo.
+echo.
+echo  Vcxsrv (GUI용) 다운로드 중...
+echo.
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://downloads.sourceforge.net/project/vcxsrv/vcxsrv/1.20.14.0/vcxsrv.1.20.14.0.installer.exe','%~dp0\vcxsrv.exe')"
-@echo.
-@echo.
-@echo.
-@echo -----------------------------Complete!
-@echo.
-@echo.
-@echo.
-@echo Install WSL Package......
-@echo.
-@echo.
-@echo.
-msiexec.exe  /i " %~dp0\wsl_update_x64.msi" /passive /qn
-@echo.
-@echo.
-@echo.
-@echo -----------------------------Complete!
-@echo.
-@echo.
-@echo.
-@echo Install vcxsrv(for GUI)......
-@echo.
-@echo.
-@echo.
+echo.
+echo  Vcxsrv (GUI용) 다운로드 완료.
+echo.
+echo.
+echo  WSL 패키지 설치 중...
+msiexec.exe /i "%~dp0\wsl_update_x64.msi" /passive /qn
+echo WSL 패키지 설치 완료.
+
+echo.
+echo  Vcxsrv (GUI용) 설치 중...
 "%~dp0\vcxsrv.exe" /S /v"/qn"
-@echo.
-@echo.
-@echo.
-@echo -----------------------------Complete!
-@echo.
-@echo.
-@echo.
-@echo Delete download files......
-@echo.
-@echo.
-@echo.
+echo  Vcxsrv (GUI용) 설치 완료.
+
+echo.
+echo  다운로드 파일 삭제 중...
 del /q "%~dp0\wsl_update_x64.msi"
-@echo.
-@echo.
-@echo.
 del /q "%~dp0\vcxsrv.exe"
-@echo.
-@echo.
-@echo.
-@echo -----------------------------Complete!
-@echo.
-@echo.
-@echo.
-@echo Execute vcxsrv......
-@echo.
-@echo.
-@echo.
+echo 다운로드 파일 삭제 완료.
+
+echo.
+echo  Vcxsrv-Xlaunch 실행 중...
 "C:\Program Files\VcXsrv\xlaunch.exe"
-@echo.
-@echo.
-@echo.
-@echo -----------------------------Complete!
-@echo.
-@echo.
-@echo.
-@echo Unregister Ubuntu......
-@echo.
-@echo.
-@echo.
+echo  Vcxsrv 실행 완료.
+
+echo.
+echo  이전 Ubuntu 등록 해제 중...
 wsl --unregister Ubuntu-20.04
-@echo.
-@echo.
-@echo.
-@echo -----------------------------Complete!
-@echo.
-@echo.
-@echo.
-@echo Install Ubuntu......
-@echo.
-@echo.
-@echo.
-@echo After Install Ubuntu, Enter your username and password and close the window
-@echo and close the window and then proceed with step.3
+
+echo ==============================================================
+echo  Ubuntu-20.04 설치를 계속하려면 아무 키나 눌러 진행하세요.
+echo  설치가 완료되면, 아이디 및 비밀번호를 이어서 설정합니다.
+echo  설정 완료 후 해당 창을 닫으시고, 설치 스크립트를 재실행 해주세요.
+echo ==============================================================
+pause >nul
+echo.
+echo  Ubuntu-20.04 설치 중..
 wsl --install -d Ubuntu-20.04
+echo.
+echo.
+pause
+goto :EOF
+
+:Step3
+echo 단계 3: Plot juggler 설치
+echo ==============================================================
+echo                Plot juggler 인스톨러
+echo.
+echo            [설치는 순차적으로 진행되어야 합니다!]
+echo ==============================================================
+echo.
+echo.
+echo.
+echo ==============================================================
+echo  Plot juggler 설치를 이어서 진행하려면 아무 키나 눌러 진행하세요.
+echo  이후 '단계 4' 는 Ubuntu 환경에서 설치가 진행됩니다.
+echo ==============================================================
+pause >nul
+echo.
+echo  Plot juggler 설치파일들을 Git으로부터 복사 중...
+echo.
+echo  실행 스크립트 실행 중...
+echo.
+echo  '단계 4' 로 이어서 진행됩니다.
+echo.
+wsl -- git clone https://github.com/Keiiogg/tools.git ~/tools/plot_installer
+wsl -- chmod +x ~/tools/plot_installer/installer.sh
+wsl -- ~/tools/plot_installer/installer.sh
+echo.
+echo.
 
 pause
-goto exit
-
-:step3
-cls
-@echo.
-@echo.
-@echo Install windows terminal.....
-@echo.
-@echo.
-@echo.
-dism.exe /online /enable-feature /featurename:MicrosoftWindowsClientLanguagePackRoot /all /norestart
-set path=%PATH%;%systemroot%\System32\WindowsPowershell\v1.0\
-@echo.
-@echo.
-@echo -----------------------------Complete!
-@echo.
-@echo.
-@echo.
-@echo Excute install script.....
-wt wsl -e sh installer.sh
-
-pause
+goto :EOF
