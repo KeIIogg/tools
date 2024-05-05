@@ -40,6 +40,7 @@ if exist "C:\Program Files (x86)\VcXsrv\xlaunch.exe" (
 )
 
 :Step1
+cls
 echo.
 echo ==============================================================
 echo 단계 1: Windows Subsystem for Linux (WSL) 설정
@@ -88,6 +89,7 @@ echo.
 goto :EOF
 
 :Step2
+cls
 echo.
 echo ==============================================================
 echo 단계 2: 필요한 패키지 및 도구 설치
@@ -153,6 +155,9 @@ pause
 goto :EOF
 
 :Step3
+cls
+echo.
+echo ==============================================================
 echo 단계 3: Plot juggler 설치
 echo ==============================================================
 echo                Plot juggler 인스톨러
