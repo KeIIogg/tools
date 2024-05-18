@@ -84,10 +84,10 @@ echo.
 
 :: 단계 1 완료 상태 기록
 echo Step1Complete>"%CompletionFile%"
-exit /b
+
 
 shutdown -r -t 0
-exit
+exit /b
 
 
 :Step2
@@ -138,10 +138,11 @@ pause >nul
 echo.
 :: 단계 2 완료 상태 기록
 echo Step2Complete>"%CompletionFile%"
-exit /b
+
 echo  Ubuntu-20.04 설치 중..
 wsl --install -d Ubuntu-20.04
 pause
+exit /b
 
 
 :Step3
